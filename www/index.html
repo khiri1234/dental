@@ -760,22 +760,22 @@
     </div>
     <div class="flow-body">
       <div class="field-label" data-en="Your full name" data-ru="Ваше имя">Your full name</div>
-      <input class="field-input" type="text" placeholder="Full name">
+      <input class="field-input" id="pName" type="text" placeholder="Full name">
 
       <div class="field-label" data-en="Email Address" data-ru="Эл. почта">Email Address</div>
-      <input class="field-input" type="email" placeholder="you@email.com">
+      <input class="field-input" id="pEmail" type="email" placeholder="you@email.com">
 
       <div class="field-label" data-en="Contact Number" data-ru="Номер телефона">Contact Number</div>
-      <input class="field-input" type="tel" placeholder="+7 (___) ___-__-__">
+      <input class="field-input" id="pPhone" type="tel" placeholder="+7 (___) ___-__-__">
 
       <div class="field-row2">
         <div>
           <div class="field-label" data-en="Your age" data-ru="Возраст">Your age</div>
-          <input class="field-input" type="number" placeholder="27">
+          <input class="field-input" id="pAge" type="number" placeholder="27">
         </div>
         <div>
           <div class="field-label" data-en="Gender" data-ru="Пол">Gender</div>
-          <select class="field-select">
+          <select class="field-select" id="pGender">
             <option data-en="Female" data-ru="Женский">Female</option>
             <option data-en="Male" data-ru="Мужской">Male</option>
           </select>
@@ -783,9 +783,9 @@
       </div>
 
       <div class="field-label" data-en="Describe your concern" data-ru="Опишите проблему">Describe your concern</div>
-      <textarea class="field-textarea" placeholder="e.g. sensitivity when drinking cold water, mild pain when chewing..."></textarea>
+      <textarea class="field-textarea" id="pConcern" placeholder="e.g. sensitivity when drinking cold water, mild pain when chewing..."></textarea>
     </div>
-    <div class="flow-cta" onclick="flowNext('flowPayment')" data-en="Continue" data-ru="Продолжить">Continue</div>
+    <div class="flow-cta" id="patientCta" onclick="submitPatientDetails()" data-en="Continue" data-ru="Продолжить">Continue</div>
   </div>
 
   <!-- SCREEN 4: PAYMENT METHOD -->
@@ -884,16 +884,69 @@
       showFlowPage(flowStack[flowStack.length - 1]);
     }
   }
+  function submitPatientDetails(){
+    var name = document.getElementById('pName').value.trim();
+    var email = document.getElementById('pEmail').value.trim();
+    var phone = document.getElementById('pPhone').value.trim();
+    if (!name || !email || !phone) {
+      showToast(currentLang === 'en' ? 'Please fill in name, email and phone' : 'Заполните имя, почту и телефон');
+      return;
+    }
+    flowNext('flowPayment');
+  }
+  function labelOf(el){
+    if (!el) return '';
+    return el.getAttribute('data-en') || el.textContent.trim();
+  }
+  function gatherAppointmentData(){
+    var feeCard = document.querySelector('#flowSchedule .fee-card.active .nm');
+    var toggle = document.querySelector('#flowSchedule .toggle-pill.active');
+    var dayChip = document.querySelector('#flowSchedule .day-chip.active');
+    var slotChip = document.querySelector('#flowSchedule .slot-chip.active');
+    var payOption = document.querySelector('#flowPayment .pay-option.selected');
+    var genderOpt = document.getElementById('pGender').selectedOptions[0];
+    return {
+      name: document.getElementById('pName').value.trim(),
+      email: document.getElementById('pEmail').value.trim(),
+      phone: document.getElementById('pPhone').value.trim(),
+      age: document.getElementById('pAge').value.trim(),
+      gender: labelOf(genderOpt),
+      concern: document.getElementById('pConcern').value.trim(),
+      consultationType: labelOf(feeCard),
+      mode: labelOf(toggle),
+      date: dayChip ? (dayChip.querySelector('.d').textContent + ' ' + dayChip.querySelector('.n').textContent) : '',
+      timeSlot: slotChip ? slotChip.textContent.trim() : '',
+      paymentMethod: payOption ? labelOf(payOption.querySelector(':scope > div:not(.radio)')) : '',
+      status: 'confirmed'
+    };
+  }
   function confirmBooking(){
     var cta = document.getElementById('payCta');
-    cta.textContent = currentLang === 'en' ? '✓ Booking Confirmed' : '✓ Запись подтверждена';
-    cta.style.background = 'var(--teal)';
-    setTimeout(function(){
-      document.getElementById('flowRoot').classList.remove('active');
-      flowStack = [];
-      cta.textContent = currentLang === 'en' ? cta.getAttribute('data-en') : cta.getAttribute('data-ru');
-      cta.style.background = '';
-    }, 1400);
+    if (cta.dataset.busy === '1') return;
+    if (typeof window.saveAppointment !== 'function'){
+      showToast(currentLang === 'en' ? 'Booking service unavailable — try again later' : 'Сервис записи недоступен — попробуйте позже');
+      return;
+    }
+    var data = gatherAppointmentData();
+    var originalText = cta.textContent;
+    cta.dataset.busy = '1';
+    cta.textContent = currentLang === 'en' ? 'Booking…' : 'Сохранение…';
+    window.saveAppointment(data).then(function(){
+      cta.textContent = currentLang === 'en' ? '✓ Booking Confirmed' : '✓ Запись подтверждена';
+      cta.style.background = 'var(--teal)';
+      setTimeout(function(){
+        document.getElementById('flowRoot').classList.remove('active');
+        flowStack = [];
+        cta.textContent = currentLang === 'en' ? cta.getAttribute('data-en') : cta.getAttribute('data-ru');
+        cta.style.background = '';
+        cta.dataset.busy = '0';
+      }, 1400);
+    }).catch(function(err){
+      console.error('saveAppointment failed', err);
+      cta.textContent = originalText;
+      cta.dataset.busy = '0';
+      showToast(currentLang === 'en' ? 'Could not save booking — check connection and try again' : 'Не удалось сохранить запись — проверьте соединение');
+    });
   }
 
   /* ---------- DEMO INTERACTIONS ---------- */
@@ -946,6 +999,28 @@
       : ['Главная', 'Записи', 'Направления', 'Профиль — демо'];
     showToast(labels[index]);
   }
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+  var firebaseConfig = {
+    apiKey: "AIzaSyA-xKXg_mnS_XxUTiTXsxMDVzRtHEyT6OA",
+    authDomain: "fatima-dental.firebaseapp.com",
+    projectId: "fatima-dental",
+    storageBucket: "fatima-dental.firebasestorage.app",
+    messagingSenderId: "296947683092",
+    appId: "1:296947683092:web:f254dc963d1675b61cfc01"
+  };
+
+  var app = initializeApp(firebaseConfig);
+  var db = getFirestore(app);
+
+  window.saveAppointment = function(data){
+    var payload = Object.assign({}, data, { createdAt: serverTimestamp() });
+    return addDoc(collection(db, 'appointments'), payload);
+  };
 </script>
 </body>
 </html>

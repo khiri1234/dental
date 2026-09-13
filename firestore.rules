@@ -1,0 +1,20 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /appointments/{appointmentId} {
+      // Anyone using the app can submit a new appointment request...
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.name.size() > 0
+                    && request.resource.data.email is string
+                    && request.resource.data.phone is string
+                    && request.resource.data.keys().hasOnly([
+                         'name', 'email', 'phone', 'age', 'gender', 'concern',
+                         'consultationType', 'mode', 'date', 'timeSlot',
+                         'paymentMethod', 'status', 'createdAt'
+                       ]);
+      // ...but nobody can read, edit, or delete appointments from the client.
+      // View/manage them in the Firebase Console (Firestore Database > Data).
+      allow read, update, delete: if false;
+    }
+  }
+}
