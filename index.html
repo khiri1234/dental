@@ -58,7 +58,7 @@
     position:fixed; inset:0; z-index:200;
     background:linear-gradient(180deg, #E4F0F0 0%, #BFDCDD 38%, #4E8B93 78%, #2E6373 100%);
     display:flex; flex-direction:column;
-    padding:34px 22px 22px;
+    padding:calc(34px + env(safe-area-inset-top)) 22px 22px;
     overflow:hidden;
   }
   .intro-headline{color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:600; font-size:29px; line-height:1.22; position:relative; z-index:2;}
@@ -98,7 +98,7 @@
   .app-header{
     background:linear-gradient(165deg, #2E6373 0%, #1B4552 55%, #123642 100%);
     color:#fff;
-    padding:26px 24px 56px;
+    padding:calc(26px + env(safe-area-inset-top)) 24px 56px;
     position:relative; overflow:hidden;
   }
   .tooth-watermark{
@@ -306,7 +306,7 @@
   #flowRoot.active{display:block;}
   .flow-page{position:absolute; inset:0; display:none; flex-direction:column; overflow-y:auto; -webkit-overflow-scrolling:touch; padding-bottom:calc(24px + env(safe-area-inset-bottom));}
   .flow-page.current{display:flex;}
-  .flow-topbar{display:flex; align-items:center; padding:20px 20px 10px; flex-shrink:0;}
+  .flow-topbar{display:flex; align-items:center; padding:calc(20px + env(safe-area-inset-top)) 20px 10px; flex-shrink:0;}
   .flow-back{width:38px; height:38px; border-radius:50%; background:#F2F3F3; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--ink);}
   .flow-back svg{width:16px; height:16px;}
   .flow-title{flex:1; text-align:center; font-family:'Poppins',sans-serif; font-weight:600; font-size:16px; margin-right:38px;}
