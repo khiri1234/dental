@@ -198,12 +198,10 @@
   .treat-card:hover{box-shadow:0 14px 24px -18px rgba(18,54,66,0.3);}
   .treat-card:active{transform:scale(0.96);}
   .treat-ic{
-    width:60px; height:60px; border-radius:18px;
-    background:radial-gradient(120% 120% at 30% 20%, #FFFFFF 0%, #DCF0EA 55%, #C3E4DA 100%);
-    box-shadow:inset 0 1px 2px rgba(255,255,255,0.9), inset 0 -6px 10px rgba(38,93,110,0.12), 0 8px 14px -8px rgba(18,54,66,0.35);
+    width:56px; height:56px; border-radius:50%; background:var(--mint); color:var(--teal);
     display:flex; align-items:center; justify-content:center; margin:0 auto 10px;
   }
-  .treat-ic svg{width:38px; height:38px;}
+  .treat-ic svg{width:26px; height:26px;}
   .treat-card span{font-weight:600; font-size:13px; display:block;}
 
   /* ---------- MILESTONE / LIST CARDS ---------- */
@@ -551,53 +549,19 @@
       <div class="section-title-row"><h3 data-en="Popular Treatments" data-ru="Популярные процедуры"><span style="font-size:14px;margin-right:5px;">🦷</span>Popular Treatments</h3><span class="view-all" data-en="View All" data-ru="Все" onclick="showToast(currentLang==='en'?'Full list — demo only':'Полный список — демо')">View All</span></div>
       <div class="treat-grid">
         <div class="treat-card" onclick="openFlow('flowDoctor')">
-          <div class="treat-ic"><svg viewBox="0 0 48 48" fill="none">
-            <defs><linearGradient id="tc1g" x1="24" y1="6" x2="24" y2="42" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#BFE3DA"/></linearGradient></defs>
-            <path d="M24 8c-6.5 0-11 4.3-11 10.5 0 8 4.5 12.5 6.5 21 1 4.2 3.2 4.2 4.2-.2.8-3.4 1.3-5.3 1.3-5.3s.5 1.9 1.3 5.3c1 4.4 3.2 4.4 4.2.2 2-8.5 6.5-13 6.5-21C35 12.3 30.5 8 24 8Z" fill="url(#tc1g)" stroke="#5FA895" stroke-width="1.2"/>
-            <ellipse cx="19" cy="16" rx="3.2" ry="5.5" fill="#ffffff" opacity="0.75"/>
-            <path d="M37 9.5l1.8 1.8M39.3 9.3l-1.8 1.8" stroke="#F0A93B" stroke-width="2.2" stroke-linecap="round"/>
-            <path d="M9 15l1.6 1.6M11 14.8l-1.6 1.6" stroke="#F0A93B" stroke-width="1.8" stroke-linecap="round"/>
-          </svg></div>
+          <div class="treat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v4"/><path d="M8 2h6"/><path d="M8 6h8l1 3-1.2 11a1.8 1.8 0 0 1-1.8 1.6h-3a1.8 1.8 0 0 1-1.8-1.6L7 9Z"/></svg></div>
           <span data-en="Teeth Cleaning" data-ru="Чистка зубов">Teeth Cleaning</span>
         </div>
         <div class="treat-card" onclick="openFlow('flowDoctor')">
-          <div class="treat-ic"><svg viewBox="0 0 48 48" fill="none">
-            <defs><linearGradient id="tw1g" x1="24" y1="10" x2="24" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#FDF0DA"/></linearGradient></defs>
-            <g stroke="#F0A93B" stroke-width="2" stroke-linecap="round"><path d="M24 4v4"/><path d="M11 9l3 3"/><path d="M37 9l-3 3"/><path d="M6 22h4"/><path d="M38 22h4"/></g>
-            <path d="M24 14c-6 0-10 3.8-10 9.2 0 7 4 11 5.8 18.4.9 3.7 2.8 3.7 3.7-.2.7-3 1.2-4.7 1.2-4.7s.5 1.7 1.2 4.7c.9 3.9 2.8 3.9 3.7.2C31 34.2 35 30.2 35 23.2 35 17.8 30 14 24 14Z" fill="url(#tw1g)" stroke="#E0A030" stroke-width="1.2"/>
-            <ellipse cx="19.5" cy="21" rx="3" ry="5" fill="#ffffff" opacity="0.8"/>
-          </svg></div>
+          <div class="treat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l-1 7-4 9-4-9Z"/><path d="M19 4l1 2 2 1-2 1-1 2-1-2-2-1 2-1Z" fill="currentColor" stroke="none"/></svg></div>
           <span data-en="Teeth Whitening" data-ru="Отбеливание">Teeth Whitening</span>
         </div>
         <div class="treat-card" onclick="openFlow('flowDoctor')">
-          <div class="treat-ic"><svg viewBox="0 0 48 48" fill="none">
-            <defs>
-              <linearGradient id="di1crown" x1="24" y1="6" x2="24" y2="18" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#BFE3DA"/></linearGradient>
-              <linearGradient id="di1post" x1="18" y1="18" x2="30" y2="18" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#8FB9AE"/><stop offset="50%" stop-color="#3E7F8F"/><stop offset="100%" stop-color="#8FB9AE"/></linearGradient>
-            </defs>
-            <path d="M17 7h14l-2 9H19Z" fill="url(#di1crown)" stroke="#5FA895" stroke-width="1.2"/>
-            <rect x="20" y="16" width="8" height="24" rx="2" fill="url(#di1post)" stroke="#265D6E" stroke-width="1"/>
-            <path d="M18.5 21h11M18.5 25.5h11M18.5 30h11M18.5 34.5h11" stroke="#123642" stroke-width="1.4" opacity="0.5" stroke-linecap="round"/>
-          </svg></div>
+          <div class="treat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l-1 4H10Z"/><path d="M10.5 7v13M13.5 7v13"/><path d="M9 10.5h6M9 13.5h6M9 16.5h6M9 19.5h6"/></svg></div>
           <span data-en="Dental Implant" data-ru="Имплантация">Dental Implant</span>
         </div>
         <div class="treat-card" onclick="openFlow('flowDoctor')">
-          <div class="treat-ic"><svg viewBox="0 0 48 48" fill="none">
-            <defs><linearGradient id="ob1g" x1="24" y1="10" x2="24" y2="30" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#DCF0EA"/></linearGradient></defs>
-            <g fill="url(#ob1g)" stroke="#5FA895" stroke-width="1">
-              <rect x="8" y="16" width="6.5" height="15" rx="2.4" transform="rotate(-10 11.25 23.5)"/>
-              <rect x="14.7" y="11.5" width="6.5" height="17" rx="2.4" transform="rotate(-4 18 20)"/>
-              <rect x="21" y="9.5" width="6.5" height="18" rx="2.4"/>
-              <rect x="27.3" y="11.5" width="6.5" height="17" rx="2.4" transform="rotate(4 30.5 20)"/>
-              <rect x="33.5" y="16" width="6.5" height="15" rx="2.4" transform="rotate(10 36.75 23.5)"/>
-            </g>
-            <path d="M9.5 22.5h29" stroke="#9FB4B8" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="11.3" cy="22.5" r="2.1" fill="#F0A93B" stroke="#B3781E" stroke-width="0.5"/>
-            <circle cx="17.7" cy="20" r="2.1" fill="#F0A93B" stroke="#B3781E" stroke-width="0.5"/>
-            <circle cx="24" cy="19" r="2.1" fill="#F0A93B" stroke="#B3781E" stroke-width="0.5"/>
-            <circle cx="30.3" cy="20" r="2.1" fill="#F0A93B" stroke="#B3781E" stroke-width="0.5"/>
-            <circle cx="36.7" cy="22.5" r="2.1" fill="#F0A93B" stroke="#B3781E" stroke-width="0.5"/>
-          </svg></div>
+          <div class="treat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l-1 9-4 9-4-9Z"/><path d="M7 10h10"/><circle cx="8" cy="10" r="1.1" fill="currentColor" stroke="none"/><circle cx="16" cy="10" r="1.1" fill="currentColor" stroke="none"/></svg></div>
           <span data-en="Orthodontic Braces" data-ru="Брекеты">Orthodontic Braces</span>
         </div>
       </div>
