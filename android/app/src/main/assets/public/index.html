@@ -189,6 +189,21 @@
   .icon-item span{font-size:11px; color:var(--mute); text-align:center; line-height:1.25;}
   .icon-item.active .icon-circle{background:var(--teal-deep); color:#fff;}
 
+  /* ---------- POPULAR TREATMENTS ---------- */
+  .treat-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:12px;}
+  .treat-card{
+    background:var(--card); border:1px solid var(--line); border-radius:20px; padding:18px 14px;
+    text-align:center; cursor:pointer; transition:transform .15s ease, box-shadow .2s ease;
+  }
+  .treat-card:hover{box-shadow:0 14px 24px -18px rgba(18,54,66,0.3);}
+  .treat-card:active{transform:scale(0.96);}
+  .treat-ic{
+    width:56px; height:56px; border-radius:50%; background:var(--mint); color:var(--teal);
+    display:flex; align-items:center; justify-content:center; margin:0 auto 10px;
+  }
+  .treat-ic svg{width:26px; height:26px;}
+  .treat-card span{font-weight:600; font-size:13px; display:block;}
+
   /* ---------- MILESTONE / LIST CARDS ---------- */
   .m-card{
     border-radius:22px; overflow:hidden; margin-bottom:16px;
@@ -525,6 +540,29 @@
         <div class="icon-item" style="flex-shrink:0;" onclick="selectAmongSiblings(this,'active')">
           <div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v10M8 9l4 4 4-4"/><path d="M6 21h12"/></svg></div>
           <span data-en="Implant Interest" data-ru="Интерес к имплантологии">Implant Interest</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- POPULAR TREATMENTS -->
+    <div class="section">
+      <div class="section-title-row"><h3 data-en="Popular Treatments" data-ru="Популярные процедуры"><span style="font-size:14px;margin-right:5px;">🦷</span>Popular Treatments</h3><span class="view-all" data-en="View All" data-ru="Все" onclick="showToast(currentLang==='en'?'Full list — demo only':'Полный список — демо')">View All</span></div>
+      <div class="treat-grid">
+        <div class="treat-card" onclick="openFlow('flowDoctor')">
+          <div class="treat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v4"/><path d="M8 2h6"/><path d="M8 6h8l1 3-1.2 11a1.8 1.8 0 0 1-1.8 1.6h-3a1.8 1.8 0 0 1-1.8-1.6L7 9Z"/></svg></div>
+          <span data-en="Teeth Cleaning" data-ru="Чистка зубов">Teeth Cleaning</span>
+        </div>
+        <div class="treat-card" onclick="openFlow('flowDoctor')">
+          <div class="treat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l-1 7-4 9-4-9Z"/><path d="M19 4l1 2 2 1-2 1-1 2-1-2-2-1 2-1Z" fill="currentColor" stroke="none"/></svg></div>
+          <span data-en="Teeth Whitening" data-ru="Отбеливание">Teeth Whitening</span>
+        </div>
+        <div class="treat-card" onclick="openFlow('flowDoctor')">
+          <div class="treat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l-1 4H10Z"/><path d="M10.5 7v13M13.5 7v13"/><path d="M9 10.5h6M9 13.5h6M9 16.5h6M9 19.5h6"/></svg></div>
+          <span data-en="Dental Implant" data-ru="Имплантация">Dental Implant</span>
+        </div>
+        <div class="treat-card" onclick="openFlow('flowDoctor')">
+          <div class="treat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l-1 9-4 9-4-9Z"/><path d="M7 10h10"/><circle cx="8" cy="10" r="1.1" fill="currentColor" stroke="none"/><circle cx="16" cy="10" r="1.1" fill="currentColor" stroke="none"/></svg></div>
+          <span data-en="Orthodontic Braces" data-ru="Брекеты">Orthodontic Braces</span>
         </div>
       </div>
     </div>
